@@ -6,7 +6,7 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int j, cnt = 0;
+	unsigned int j, string_cout, cnt = 0;
 
 	va_list arguments;
 
@@ -18,15 +18,25 @@ int _printf(const char *format, ...)
 		{
 			ptch(format[j]);
 		}
-		 if (format[j] == '%' && format[j + 1] == 'c')
+		else if (format[j + 1] == 'c')
 		{
 			ptch(va_arg(arguments, int));
 			j++;
 		}
-
+		else if (format[j + 1] == 's')
+		{
+			string_cout = putscriin(va_arg(arguments, char *));
+			j++;
+			string_cout += (string_cout -1);
+		}
+		else if (format[j + 1] == '%')
+		{
+			ptch('%');
+		}
 		cnt += 1;
+		
+		}
 	}
-
 	va_end(arguments);
 	return (cnt);
 

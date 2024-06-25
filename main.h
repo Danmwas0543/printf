@@ -7,5 +7,6 @@
 
 int ptch(char v);
 int _printf(const char *format, ...);
+int putscriin(char *c);
 
 #endif
