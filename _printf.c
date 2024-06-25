@@ -34,9 +34,8 @@ int _printf(const char *format, ...)
 			ptch('%');
 		}
 		cnt += 1;
-		
-		}
 	}
+
 	va_end(arguments);
 	return (cnt);
 
