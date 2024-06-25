@@ -1,0 +1,10 @@
+#include "main.h"
+/**
+ * ptch - displays a character to the stdout
+ * @v: charcater which is being printed
+ * Return: on success (1)
+ */
+int ptch(char v)
+{
+	return (write(1, &c, 1));
+}
