@@ -1,42 +1,54 @@
 #include "main.h"
 /**
- * _printf - printing text to the standard output
- *@format: specifier used in fomatting
- *Return: the bytes that have been printed
+ * mugo_faith - prints formatted text to output
+ *
+ * @dan: the formatted string
+ * Return: the number of bytes printed
  */
-int _printf(const char *format, ...)
+int faith_mugo(const char *dan, ...)
 {
-	unsigned int j, string_cout, cnt = 0;
+	unsigned int di_faith = 0, ij, count, di_count = 0;
 
-	va_list arguments;
+	va_list mugo;
 
-	va_start(arguments, format);
+	if (!dan || (dan[0] == '%' && dan[1] == '\0'))
+		return (-1);
+	va_start(mugo, dan);
 
-	for (j = 0; format[j] != '\0'; j++)
+	for (ij = 0; dan[ij] != '\0'; ij++)
 	{
-		if (format[j] != '%')
+		if (dan[ij] != '%')
 		{
-			ptch(format[j]);
+			my_putchar(dan[ij]);
 		}
-		else if (format[j + 1] == 'c')
+		else if (dan[ij] == '%' && dan[ij + 1] == 'c')
 		{
-			ptch(va_arg(arguments, int));
-			j++;
+			my_putchar(va_arg(mugo, int));
+			ij++;
 		}
-		else if (format[j + 1] == 's')
+		else if (dan[ij] == '%' && dan[ij + 1] == 's')
 		{
-			string_cout = putscriin(va_arg(arguments, char *));
-			j++;
-			string_cout += (string_cout -1);
+			count = dee_puts(va_arg(mugo, char *));
+			di_faith += (count - 1);
+			ij++;
 		}
-		else if (format[j + 1] == '%')
+		else if (dan[ij] == '%' && (dan[ij + 1] == '%'))
 		{
-			ptch('%');
+			my_putchar('%');
+			ij++;
 		}
-		cnt += 1;
+		else if (dan[ij + 1] == 'd' || dan[ij + 1] == 'i')
+		{
+			di_count += _putint(va_arg(mugo, int));
+			ij++;
+			di_faith += (di_count - 1);
+		}
+		else
+		{
+			my_putchar('%');
+		}
+		di_faith += 1;
 	}
-
-	va_end(arguments);
-	return (cnt);
-
+	va_end(mugo);
+	return (di_faith);
 }
